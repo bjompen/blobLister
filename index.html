@@ -1,0 +1,29 @@
+<!Doctype Html>  
+<Html>     
+<Head>      
+<Title>     
+Blob Lister
+</Title>  
+</Head>  
+<Body onload="listFiles()">
+    <p id="showresulthere"></p>
+    <script>  
+        function listFiles() {
+            var keyString = "insert connection key string here"; // si=storage&spr=https&sv=2001-01-01&sr=c&sig=l0Ng//c0D3ThatSEEmsT0BeSOM3K1ndOFBaS364=
+            var containerString = "insert container URI here" // https://storageaccountname.blob.core.windows.net/containerName
+            var url = containerString + '?' + keyString + '&comp=list&restype=container';
+            var req = new XMLHttpRequest();
+            req.open('GET', url, false);
+            req.send(null);
+            var xml = req.responseXML;
+            var users = xml.getElementsByTagName("Name"); 
+            for (let item of users) {
+                if (item.innerHTML.match(/\.mp3$/)) { // Files ot list, regex. This matches .mp3
+                    var href = containerString + '/' + item.innerHTML + '?' + keyString
+                    document.getElementById("showresulthere").innerHTML += '<p><a href="' + href + '" download = "' + item.innerHTML + '">' + item.innerHTML + '</a></p>';
+                }
+            }
+        }
+    </script> 
+</Body>   
+</Html>  
