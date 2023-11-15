@@ -2,6 +2,10 @@
 
 List files on a blob storage.
 
+[Related blog post found here](https://bjompen.com/#/posts/blobLister)
+
+----
+
 Upload this index.html to the same blob container as your files and share this file instead.
 
 Using a container SAS token, browse to the URL
